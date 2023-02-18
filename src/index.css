@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "AvenirNext";
+  src: url("/src/assets/fonts/AvenirNext.ttf");
+}
+
+@layer components {
+  .input {
+    @apply border-2 border-[#545f7d/.15] p-3 rounded focus:outline-none
+  }
+  .dashboard-item {
+    @apply flex gap-2 py-2 px-5 opacity-60 cursor-pointer
+  }
+  .Active {
+    @apply text-[#39cd62] bg-[#39cd62]/10 rounded-3xl px-4 py-1
+  }
+  .Inactive {
+    @apply text-[#545f7d] bg-[#545f7d]/10 rounded-3xl px-4 py-1
+  }
+  .Blacklisted {
+    @apply text-[#e4033b] bg-[#e4033b]/10 rounded-3xl px-4 py-1
+  }
+  .Pending {
+    @apply text-[#e9b200] bg-[#e9b200]/10 rounded-3xl px-4 py-1
+  }
+}

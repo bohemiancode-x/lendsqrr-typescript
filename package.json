@@ -16,6 +16,7 @@
     "@types/react-dom": "^18.0.0",
     "@types/react-icons": "^3.0.0",
     "dayjs": "^1.11.7",
+    "material-ui-popup-state": "^5.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",

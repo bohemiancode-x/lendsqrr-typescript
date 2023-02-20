@@ -12,7 +12,7 @@ const layout = ( props: Props ) => {
             <Navbar />
         </div>
         <div className='flex'>
-            <div className='flex flex-col w-[20%] max-h-full shadow'>
+            <div className='hidden md:flex flex-col w-[20%] max-h-full shadow'>
                 <Dashboard />
             </div>
             <div className='bg-[#e5e5e5]/50 w-full'>

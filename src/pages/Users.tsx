@@ -4,8 +4,12 @@ import Layout from '../components/layout';
 import UserCard from '../components/userCard';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
+import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
+import Popover from '@mui/material/Popover';
+import FilterModal from '../components/modals/FilterModal';
 import { Oval } from 'react-loader-spinner';
 import dayjs from 'dayjs';
+import UserCta from '../components/modals/UserCta';
 
 interface Column {
     id: 'orgName' | 'userName' | 'email' | 'phoneNumber' | 'createdAt' | 'status';
@@ -63,6 +67,7 @@ const statuses: string[] = ['Active', 'Inactive', 'Pending', 'Blacklisted'];
 const Users: React.FC = () => {
     const [data, setData] = useState<[]>([]);
     const [isPending, setIsPending] = useState<boolean>(true);
+    const [showFilterModal, setShowFilterModal] = useState<boolean>(false);
     const [page, setPage] = useState<number>(0);
     const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
@@ -80,6 +85,11 @@ const Users: React.FC = () => {
         fetchData();
     }, []);
 
+
+    const filterModal = () => {
+        setShowFilterModal(!showFilterModal);
+    }
+
     console.log(data);
     
 
@@ -94,9 +104,9 @@ const Users: React.FC = () => {
 
   return (
     <Layout>
-        <div className='w-full px-16 mt-10'>
+        <div className='w-full px-5 lg:px-16 mt-10'>
             <h2 className='text-[#213f7d] text-xl font-bold my-5'>Users</h2>
-            <div className='flex justify-between'>
+            <div className='flex flex-col md:grid gap-3 md:grid-cols-2 lg:flex lg:flex-row justify-between'>
                 <UserCard icon='/icon-users.svg' text='USERS' count={2453} />
                 <UserCard icon='/icon-active.svg' text='ACTIVE USERS' count={2453} />
                 <UserCard icon='/icon-loans.svg' text='USERS WITH LOANS' count={12453} />
@@ -121,8 +131,8 @@ const Users: React.FC = () => {
                         </div>
                         }
 
-            {!isPending && <Paper sx={{ width: '100%', overflow: 'hidden', marginTop: '20px', color: "#545F7D" }}>
-                <TableContainer sx={{ maxHeight: 550 }}>
+            {!isPending && <Paper sx={{ width: '100%', overflow: 'hidden', marginTop: '20px', color: "#545F7D", position: 'relative' }}>
+                <TableContainer sx={{ maxHeight: 1000 }}>
                     <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
@@ -133,7 +143,7 @@ const Users: React.FC = () => {
                             style={{ minWidth: 150, color: '#545F7D' }}
                             >
                             {column.label}
-                            <FilterListIcon sx={{cursor: 'pointer', paddingLeft: '2px'}} fontSize='small' />
+                            <FilterListIcon onClick={filterModal} sx={{cursor: 'pointer', paddingLeft: '2px'}} fontSize='small' />
                             </TableCell>
                         ))}
                         </TableRow>
@@ -158,9 +168,29 @@ const Users: React.FC = () => {
                                     </TableCell>
                                 );
                                 })}
-                                {/* <TableCell>
-                                <MoreVertOutlinedIcon sx={{cursor: 'pointer'}} fontSize='small' />
-                                </TableCell> */}
+                                <TableCell>
+                               
+                                <PopupState variant="popover" popupId="demo-popup-popover">
+                                    {(popupState) => (
+                                        <div>
+                                            <MoreVertOutlinedIcon {...bindTrigger(popupState)} sx={{cursor: 'pointer', color: '#545F7D'}} fontSize='small' />
+                                        <Popover
+                                            {...bindPopover(popupState)}
+                                            anchorOrigin={{
+                                            vertical: 'bottom',
+                                            horizontal: 'center',
+                                            }}
+                                            transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'center',
+                                            }}
+                                        >
+                                            <UserCta />
+                                        </Popover>
+                                        </div>
+                                    )}
+                                    </PopupState>
+                                </TableCell>
                             </TableRow>
                             );
                         })}
@@ -176,6 +206,7 @@ const Users: React.FC = () => {
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
+                {showFilterModal && <FilterModal />}
                 </Paper>
             }
         </div>

@@ -10,6 +10,7 @@ import FilterModal from '../components/modals/FilterModal';
 import { Oval } from 'react-loader-spinner';
 import dayjs from 'dayjs';
 import UserCta from '../components/modals/UserCta';
+import { Link } from 'react-router-dom'
 
 interface Column {
     id: 'orgName' | 'userName' | 'email' | 'phoneNumber' | 'createdAt' | 'status';
@@ -48,10 +49,6 @@ function createData(
     return {organization, username, email, phoneNumber, dateJoined, status};
 };
 
-
-const rows = [
-    createData('Lendsqr', 'Debby Ogana', 'debby2@lendsqr.com', 8160780928, 'Apr 30, 2020 10:00AM', 'Active')
-]
 
 type DataType = {
     id: number;
@@ -151,7 +148,7 @@ const Users: React.FC = () => {
                     <TableBody>
                         {data
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        .map((row) => {
+                        .map((row: any) => {
                             return (
                             <TableRow role="checkbox" tabIndex={-1} key={row['phoneNumber']}>
                                 {columns.map((column) => {
@@ -185,7 +182,7 @@ const Users: React.FC = () => {
                                             horizontal: 'center',
                                             }}
                                         >
-                                            <UserCta />
+                                            <UserCta link={`/users/${row.id}`} />
                                         </Popover>
                                         </div>
                                     )}

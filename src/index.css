@@ -32,4 +32,10 @@
   .Pending {
     @apply text-[#e9b200] bg-[#e9b200]/10 rounded-3xl px-4 py-1
   }
+  .info_heading {
+    @apply text-xs opacity-60
+  }
+  .info_data {
+    @apply font-bold text-sm
+  }
 }

@@ -10,7 +10,6 @@ import FilterModal from '../components/modals/FilterModal';
 import { Oval } from 'react-loader-spinner';
 import dayjs from 'dayjs';
 import UserCta from '../components/modals/UserCta';
-import { Link } from 'react-router-dom'
 
 interface Column {
     id: 'orgName' | 'userName' | 'email' | 'phoneNumber' | 'createdAt' | 'status';
@@ -101,7 +100,7 @@ const Users: React.FC = () => {
 
   return (
     <Layout>
-        <div className='w-full px-5 lg:px-16 mt-10'>
+        <div className='w-full px-5 lg:px-16 mt-5 md:mt-10'>
             <h2 className='text-[#213f7d] text-xl font-bold my-5'>Users</h2>
             <div className='flex flex-col md:grid gap-3 md:grid-cols-2 lg:flex lg:flex-row justify-between'>
                 <UserCard icon='/icon-users.svg' text='USERS' count={2453} />
@@ -128,7 +127,7 @@ const Users: React.FC = () => {
                         </div>
                         }
 
-            {!isPending && <Paper sx={{ width: '100%', overflow: 'hidden', marginTop: '20px', color: "#545F7D", position: 'relative' }}>
+            {!isPending && <Paper sx={{ width: '100%', overflow: 'hidden', marginTop: '20px', color: "#545F7D", position: 'relative', marginBottom: '10px' }}>
                 <TableContainer sx={{ maxHeight: 1000 }}>
                     <Table stickyHeader aria-label="sticky table">
                     <TableHead>
@@ -137,7 +136,8 @@ const Users: React.FC = () => {
                             <TableCell
                             key={column.id}
                             align={column.align}
-                            style={{ minWidth: 150, color: '#545F7D' }}
+                            className='text-xs'
+                            style={{ minWidth: 150, color: '#545F7D', fontSize:'12px' }}
                             >
                             {column.label}
                             <FilterListIcon onClick={filterModal} sx={{cursor: 'pointer', paddingLeft: '2px'}} fontSize='small' />
@@ -156,7 +156,7 @@ const Users: React.FC = () => {
                                 const status = statuses[Math.floor(Math.random() * statuses.length)];
 
                                 return (                                
-                                    <TableCell sx={{color: '#545F7D'}} key={column.id} align={column.align}>
+                                    <TableCell sx={{color: '#545F7D', fontSize: '12px'}} key={column.id} align={column.align}>
                                         <span className={column.id === 'status' ? `${status}` : ''}>
                                             {column.id === 'createdAt'
                                                 ? dayjs(value).format('MMM D, YYYY h:mm A')

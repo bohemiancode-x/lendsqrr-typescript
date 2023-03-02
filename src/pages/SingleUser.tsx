@@ -56,7 +56,7 @@ const SingleUser:React.FC = () => {
     
   return (
     <Layout>
-        <div className='px-10 mt-8'>
+        <div className='px-4 pb-3 md:px-10 mt-8'>
         <div>
             <Link to='/users' className='flex items-center gap-2 text-[#545f7d]'>
                 <HiOutlineArrowLongLeft />
@@ -65,11 +65,11 @@ const SingleUser:React.FC = () => {
             <div className='flex justify-between'>
                 <h1 className='text-[#213F7D] font-bold text-xl mt-2'>User Details</h1>
                 {!isPending && 
-                    <div className='flex gap-4'>
-                        <button className='font-bold text-sm p-2 tracking-widest text-[#e4033b] border-[1px] rounded-lg border-[#e4033b] hover:bg-[#e4033b] hover:text-white'>
+                    <div className='flex flex-col md:flex-row gap-2 md:gap-4'>
+                        <button className='font-bold text-xs lg:text-sm p-2 tracking-widest text-[#e4033b] border-[1px] rounded-lg border-[#e4033b] hover:bg-[#e4033b] hover:text-white'>
                             BLACKLIST USER
                         </button>
-                        <button className='font-bold text-sm p-2 tracking-widest text-[#39cdcc] border-[1px] rounded-lg border-[#39cdcc] hover:bg-[#39cdcc] hover:text-white'>
+                        <button className='font-bold text-xs lg:text-sm p-2 tracking-widest text-[#39cdcc] border-[1px] rounded-lg border-[#39cdcc] hover:bg-[#39cdcc] hover:text-white'>
                             ACTIVATE USER
                         </button>
                     </div>
@@ -93,14 +93,14 @@ const SingleUser:React.FC = () => {
         {!isPending && 
             <div>
                 <div className='shadow-xl rounded mt-5 bg-white px-5'>
-                    <div className='flex py-5 gap-4 items-center'>
-                        <img className='rounded-full h-[100px]' src={data.profile.avatar} alt="" />
-                        <div>
+                    <div className='flex flex-col md:flex-row py-5 gap-2 md:gap-4 items-center'>
+                        <img className='rounded-full h-[70px] md:h-[100px]' src={data.profile.avatar} alt="" />
+                        <div className='flex items-center justify-between w-full md:w-[inherit] gap-2 md:block'>
                             <h2 className='text-[#213f7d] text-lg'>{data.profile.firstName + " " + data.profile.lastName}</h2>
                             <span className='text-[#545f7d]'>{data.profile.bvn}</span>
                         </div>
-                        <span className='border-[1px] border-[#545f7d] h-[70px] flex opacity-20'></span>
-                        <div>
+                        <span className='border-[1px] border-[#545f7d] w-full md:w-[1px] md:h-[70px] opacity-20'></span>
+                        <div className='flex items-center justify-between w-full md:w-[inherit] gap-2 md:block'>
                             <p className='text-[#213f7d] text-sm'>User's Tier</p>
                             <div className='text-[#e9b200] flex'>
                                 <MdStar />
@@ -108,15 +108,15 @@ const SingleUser:React.FC = () => {
                                 <MdStarOutline />
                             </div>
                         </div>
-                        <span className='border-[1px] border-[#545f7d] h-[70px] flex opacity-20'></span>
-                        <div className='text-[#213f7d]'>
+                        <span className='border-[1px] border-[#545f7d] w-full md:w-[1px] md:h-[70px] flex opacity-20'></span>
+                        <div className='text-[#213f7d] flex items-center justify-between w-full md:w-[inherit] gap-2 md:block'>
                             <h2 className='font-bold text-lg'>N{data.accountBalance.toLocaleString()}</h2>
                             <span className='text-xs'>{data.accountNumber + "/" + data.orgName}</span>
                         </div>
                     </div>
-                    <div className='flex justify-evenly mt-2'>
+                    <div className='flex justify-evenly text-xs md:text-base mt-2'>
                         {NavData.map((nav) => (
-                            <span className={nav.active ? 'text-[#39cdcc] py-2 px-4 border-b-[2px] border-[#39cdcc]' : 'py-2 text-[#545f7d] cursor-pointer'} key={nav.id}>
+                            <span className={nav.active ? 'text-[#39cdcc] py-2 px-4 border-b-[2px] border-[#39cdcc]' : 'hidden md:block py-2 text-[#545f7d] cursor-pointer'} key={nav.id}>
                                 {nav.text}
                             </span>
                         ))}
@@ -126,7 +126,7 @@ const SingleUser:React.FC = () => {
                 <div className='shadow-xl rounded mt-5 text-[#545f7d] bg-white px-5 py-5'>
                     <div className=''>
                         <h2 className='py-3 font-bold'>Personal Information</h2>
-                        <div className='grid grid-cols-5 gap-5'>
+                        <div className='grid grid-cols-2 md:grid-cols-5 grid-flow-row gap-5'>
                             <div>
                                 <p className='info_heading'>FULL NAME</p>
                                 <p className='info_data'>{data.profile.firstName + " " + data.profile.lastName}</p>
@@ -135,7 +135,7 @@ const SingleUser:React.FC = () => {
                                 <p className='info_heading'>PHONE NUMBER</p>
                                 <p className='info_data'>{data.profile.phoneNumber}</p>
                             </div>
-                            <div>
+                            <div className='col-span-2'>
                                 <p className='info_heading'>EMAIL ADDRESS</p>
                                 <p className='info_data'>{data.email}</p>
                             </div>
@@ -164,7 +164,7 @@ const SingleUser:React.FC = () => {
                     <span className='border-[0.5px] my-5 border-[#545f7d] flex opacity-20'></span>
                     <div className=''>
                         <h2 className='py-3 font-bold'>Education and Employment</h2>
-                        <div className='grid grid-cols-4 gap-5'>
+                        <div className='grid grid-cols-2 md:grid-cols-4 grid-flow-row gap-5'>
                             <div>
                                 <p className='info_heading'>LEVEL OF EDUCATION</p>
                                 <p className='info_data'>{data.education.level}</p>
@@ -217,7 +217,7 @@ const SingleUser:React.FC = () => {
                     <span className='border-[0.5px] my-5 border-[#545f7d] flex opacity-20'></span>
                     <div className=''>
                         <h2 className='py-3 font-bold'>Guarantor</h2>
-                        <div className='grid grid-cols-4 gap-5'>
+                        <div className='grid grid-cols-2 md:grid-cols-4 grid-flow-row gap-5'>
                             <div>
                                 <p className='info_heading'>FULL NAME</p>
                                 <p className='info_data'>{data.guarantor.firstName + " " + data.guarantor.lastName}</p>

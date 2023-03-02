@@ -11,7 +11,7 @@ const layout = ( props: Props ) => {
         <div className='sticky top-0 z-[100]'>
             <Navbar />
         </div>
-        <div className='flex'>
+        <div className='flex w-screen'>
             <div className='hidden md:flex flex-col w-[20%] max-h-full shadow'>
                 <Dashboard />
             </div>
